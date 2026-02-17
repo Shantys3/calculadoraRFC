@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=calculadorarfc
+PRODUCT_BUNDLE_IDENTIFIER=com.example.calculadorarfc.calculadorarfc$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
