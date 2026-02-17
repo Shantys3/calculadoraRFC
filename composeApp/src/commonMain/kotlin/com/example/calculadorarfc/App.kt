@@ -99,7 +99,6 @@ fun RfcScreen() {
             OutlinedTextField(
                 value = anio,
                 onValueChange = { input ->
-                    // Clausula: Solo acepta si son números Y máximo 2 caracteres
                     if (input.length <= 2 && input.all { it.isDigit() }) {
                         anio = input
                     }
@@ -110,7 +109,6 @@ fun RfcScreen() {
                 modifier = Modifier.weight(1f)
             )
 
-            // CAMPO MES
             OutlinedTextField(
                 value = mes,
                 onValueChange = { input ->
@@ -124,7 +122,6 @@ fun RfcScreen() {
                 modifier = Modifier.weight(1f)
             )
 
-            // CAMPO DÍA
             OutlinedTextField(
                 value = dia,
                 onValueChange = { input ->
