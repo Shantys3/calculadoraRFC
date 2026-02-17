@@ -38,12 +38,14 @@ object RfcLogic {
     }
 
     private fun limpiarTexto(texto: String): String {
-        return texto.uppercase()
+        var limpio = texto.uppercase()
             .replace("Á", "A").replace("É", "E").replace("Í", "I")
             .replace("Ó", "O").replace("Ú", "U").replace("Ñ", "X")
-            .trim()
-    }
 
+        limpio = limpio.filter { it.isLetter() || it.isWhitespace() }
+
+        return limpio.trim()
+    }
     private fun buscarPrimeraVocalInterna(texto: String): Char {
         if (texto.length < 2) return 'X'
         val vocales = listOf('A', 'E', 'I', 'O', 'U')

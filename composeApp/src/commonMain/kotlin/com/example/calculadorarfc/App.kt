@@ -1,6 +1,7 @@
 package com.example.calculadorarfc
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -8,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 
 
 @Composable
@@ -46,6 +49,7 @@ fun RfcScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         Text(
             text = "Calculadora de RFC",
             style = MaterialTheme.typography.headlineMedium,
@@ -72,67 +76,63 @@ fun RfcScreen() {
 
         OutlinedTextField(
             value = nombre,
-            onValueChange = { nombre = it },
+            onValueChange = { if (it.all { char -> char.isLetter() || char.isWhitespace() }) nombre = it }, // Validación: Solo letras
             label = { Text("Nombre(s)") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next) // Al dar Enter/Tab va al siguiente
         )
 
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            // CAMPO PATERNO
             OutlinedTextField(
                 value = paterno,
-                onValueChange = { paterno = it },
+                onValueChange = { if (it.all { char -> char.isLetter() || char.isWhitespace() }) paterno = it },
                 label = { Text("Apellido Paterno") },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
+            // CAMPO MATERNO
             OutlinedTextField(
                 value = materno,
-                onValueChange = { materno = it },
+                onValueChange = { if (it.all { char -> char.isLetter() || char.isWhitespace() }) materno = it },
                 label = { Text("Apellido Materno") },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
         }
 
         Text("Fecha de Nacimiento (YY MM DD)", style = MaterialTheme.typography.titleMedium)
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            // CAMPO AÑO
             OutlinedTextField(
                 value = anio,
-                onValueChange = { input ->
-                    if (input.length <= 2 && input.all { it.isDigit() }) {
-                        anio = input
-                    }
-                },
+                onValueChange = { if (it.length <= 2 && it.all { char -> char.isDigit() }) anio = it },
                 label = { Text("Año") },
                 placeholder = { Text("99") },
+                modifier = Modifier.weight(1f),
                 singleLine = true,
-                modifier = Modifier.weight(1f)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next)
             )
-
             OutlinedTextField(
                 value = mes,
-                onValueChange = { input ->
-                    if (input.length <= 2 && input.all { it.isDigit() }) {
-                        mes = input
-                    }
-                },
+                onValueChange = { if (it.length <= 2 && it.all { char -> char.isDigit() }) mes = it },
                 label = { Text("Mes") },
                 placeholder = { Text("01") },
+                modifier = Modifier.weight(1f),
                 singleLine = true,
-                modifier = Modifier.weight(1f)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next)
             )
-
             OutlinedTextField(
                 value = dia,
-                onValueChange = { input ->
-                    if (input.length <= 2 && input.all { it.isDigit() }) {
-                        dia = input
-                    }
-                },
+                onValueChange = { if (it.length <= 2 && it.all { char -> char.isDigit() }) dia = it },
                 label = { Text("Día") },
                 placeholder = { Text("15") },
+                modifier = Modifier.weight(1f),
                 singleLine = true,
-                modifier = Modifier.weight(1f)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done)
             )
         }
     }
